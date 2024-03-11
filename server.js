@@ -7,20 +7,16 @@ const cors = require('cors');
 const app = express();
 
 // Usar el middleware CORS
-app.use(cors({
-    origin: 'https://nexgen-app.onrender.com', // Reemplaza con tu dominio en Render
-    optionsSuccessStatus: 200
-}));
+app.use(cors());
 
 // Configurar bodyParser para analizar solicitudes JSON
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Conexión a la base de datos MongoDB local
+// Conexión a la base de datos MongoDB
 mongoose.connect('mongodb://localhost:27017/usuarios', {
     useNewUrlParser: true,
 });
-
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error de conexión a MongoDB:'));
 db.once('open', () => {
@@ -63,7 +59,7 @@ app.get('/', (req, res) => {
 });
 
 // Iniciar el servidor
-const PORT = process.env.PORT || 3000; // Utiliza el puerto proporcionado por Render o el puerto 3000
+const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
