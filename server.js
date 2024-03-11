@@ -47,7 +47,7 @@ app.post('/usuarios', async (req, res) => {
 // Ruta para manejar las solicitudes de obtener todos los usuarios
 app.get('/listar-usuarios', async (req, res) => {
     try {
-        const usuarios = await Usuario.find({}, 'nombre correo'); // Obtener solo nombre y correo
+        const usuarios = await Usuario.find({}, 'nombre correo contrasena'); // Obtener solo nombre y correo
         res.status(200).json(usuarios);
     } catch (error) {
         res.status(500).json({ error: 'Error interno del servidor al obtener usuarios' });
